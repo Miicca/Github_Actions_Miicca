@@ -1,7 +1,8 @@
 import http_pyynto
 
 
-def ryhmittele_toimipaikoittain(numero_sanakirja):
+def ryhmittele_toimipaikoittain(numero_sanakirja: dict) -> dict:
+ 
     paikat = {}
     for numero, nimi in numero_sanakirja.items():
         nimi = normalisoi_nimi(nimi)
@@ -13,16 +14,19 @@ def ryhmittele_toimipaikoittain(numero_sanakirja):
     return paikat
 
 
-def normalisoi_nimi(nimi):
+def normalisoi_nimi(nimi: str) -> str:
+    
     return nimi.upper().strip().replace(' ', '').replace('-', '')
 
 
-def etsi_postinumerot(nimi, toimipaikat_dict):
+def etsi_postinumerot(nimi: str, toimipaikat_dict: dict):
+
     normalisoitu = normalisoi_nimi(nimi)
     return toimipaikat_dict.get(normalisoitu, [])
 
 
 def main():
+    
     postinumerot = http_pyynto.hae_postinumerot()
 
     toimipaikat = ryhmittele_toimipaikoittain(postinumerot)
